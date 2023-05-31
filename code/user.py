@@ -6,7 +6,7 @@ consonents = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', '
 alphabet = vowels + consonents
 
 letters = []
-solutions = []
+
 
 def get_user_letters():
 
@@ -22,27 +22,20 @@ def get_user_letters():
     print(letters)
 
 
-def check_word(word, letters=list):
-    word = list(word)
-    count = word.__len__()
-    for letter in word:
-        if word.__len__() < 3:
-            return
-        if letter in letters:
-            letters.remove(letter)
-            count -= 1
-        elif letter == ' ':
-            count -= 1
-        else:
-            return
-           
-    return count
+
+def check_word_dict(words=dict, letters=list):
+    solutions = []
+    for i in words:
+        count = 0
+        target = words[i].__len__()
+        for letter in letters:
+            if letter in words[i]:
+                count += 1
+                words[i].remove(letter)
+            if count == target and target >=3:
+                solutions.append(i)
+                break
+    print(solutions)
+    return solutions
 
 trialwords = get_words()
-
-for i in trialwords:
-    count = check_word(i, ['p', 's', 'a', 'c', 'b', 't', 'r', 'a', 'n', 's', 'e', 'e'])
-    if count == 0:
-        solutions.append(i)
-
-print(solutions)
